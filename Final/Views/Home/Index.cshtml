@@ -1,8 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<Monster>
+@{
+    ViewBag.Title = "Lethal Company Monsters";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="containter">
+    <header class="jumbotron">
+        <h3>Monsters</h3>
+    </header>
+
+    <!--Table of Monsters-->
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rating *1-5</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var monster in Model)
+                {
+                    <tr>
+                        <td>@monster.Name</td>
+                        <td>@monster.Rating</td>
+                        <td>
+                            <a asp-controller="Monster" asp-action="Edit" class="btn btn-secondary"
+                               asp-route-id="@monster.MonsterID">Edit</a>
+                            <a asp-controller="Monster" asp-action="Delete" class="btn btn-secondary"
+                               asp-route-id="@monster.MonsterID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <a asp-controller="Monster" class="btn btn-primary" asp-action="Add">Add Monster</a>
 </div>
